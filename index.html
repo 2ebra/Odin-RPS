@@ -2,98 +2,70 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400&family=Koulen&display=swap" rel="stylesheet">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
   <header>
-    <h1>ROCK PAPER SCISSORS</h1>
-    <h4>INSTRUCTIONS</h4>
-    <p>Choose how many rounds you'd like to play.  For each round choose ROCK, PAPER, or SCISSORS</p>
+    <div class="container flex-row">
+      <div class="title-container">
+        <div><img src="imgs/Title-Rock.svg" alt="Rock"></div>
+        <div><img src="imgs/Title-Paper.svg" alt="Paper"></div>
+        <div><img src="imgs/Title-Scissors.svg" alt="Scissors"></div>
+      </div>
+      <div class="instructions-container">
+        <h3 class="header">Instructions</h3>
+        <p class="comment">I mean do you really not know how to play Rock, Paper, Scissors?</p>
+        <p>Choose the weapon you're taking into battle with you and click on it. . With your object in tow you will face off against your challenger.</p>
+        <p>Rock beats scissors, scissors beats paper, and paper beats rock (no one knows why or how but it does).</p>
+      </div>
+    </div>
   </header>
   <main>
     <section>
-      <ul>
-        <li>ROCK</li>
-        <li>PAPER</li>
-        <li>SCISSORS</li>
-      </ul>
+      <div class="container">
+        <h3 class="header t-al-c">Choose your weapon</h3>
+        <div class="btn-container">
+          <button type="button" class="btn">
+            <span class="btn__icon"><img src="imgs/Rock.svg" alt="Rock"></span>
+            <span class="btn__text">ROCK</span>
+          </button>
+          <button type="button" class="btn">
+            <span class="btn__icon"><img src="imgs/Paper.svg" alt="Paper"></span>
+            <span class="btn__text">PAPER</span>
+          </button>
+          <button type="button" class="btn">
+            <span class="btn__icon"><img src="imgs/Scissors.svg" alt="Scissors"></span>
+            <span class="btn__text">SCISSORS</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container flex-row">
+        <div class="score">
+          <div class="score__icon"></div>
+          <div class="point-container flex-row">
+            <div class="header">Player:</div>
+            <div class="score__points">01</div>
+          </div>
+        </div>
+        <div class="versus">VS</div>
+        <div class="score">
+          <div class="score__icon"></div>
+          <div class="point-container flex-row">
+            <div class="header">Computer:</div>
+            <div class="score__points">01</div>
+          </div>
+        </div>
+
+      </div>
     </section>
   </main>
 
 </body>
-<script>
-  let playerScore = 0;
-  let computerScore = 0;
-
-  function game() {
-    let rounds = prompt("How many rounds?", 3)
-
-    for (i=1; i <= rounds; i++) {
-      console.log("+ - - ROUND "+ i + " - - +");
-      playRound()
-    }
-    whoWon();
-
-    
-  }
-
-  function playRound() {
-    let computerSelection = getComputerChoice();
-    let playerSelection = prompt("ROCK, PAPER, SCISSORS:", "ROCK")
-
-    console.log (playerSelection + " vs " + computerSelection);
-
-    if(playerSelection === computerSelection){
-      console.log("Tied")
-    }
-    if(playerSelection==="ROCK" && computerSelection==="SCISSORS" ||
-      playerSelection==="PAPER" && computerSelection==="ROCK" ||
-      playerSelection==="SCISSORS" && computerSelection==="PAPER" ) {
-        playerScore++;
-        console.log("Point for player!");
-      }
-    if(playerSelection==="ROCK" && computerSelection==="PAPER" ||
-      playerSelection==="PAPER" && computerSelection==="SCISSORS" ||
-      playerSelection==="SCISSORS" && computerSelection==="ROCK" ) {
-        computerScore++;
-        console.log("Point for computer!");
-      }
-
-
-      console.log("Player: " + playerScore);
-      console.log("Computer: "+computerScore);
-    
-  }
-
-  function getComputerChoice() {
-    let random = Math.floor(Math.random()*3)+1;
-
-    if(random === 1){
-      return "ROCK";
-    }
-    if(random === 2){
-      return "PAPER";
-    }
-    if(random === 3){
-      return "SCISSORS";
-    } 
-  }
-
-  function whoWon(){
-    if (computerScore > playerScore){
-      console.log ("YOU LOST");
-    }
-    else if (playerScore > computerScore){
-      console.log ("YOU WON");
-    }
-    else{
-      console.log("+ - - BREAK THE TIE - - +");
-      playRound();
-      whoWon();
-    }
-  }
-
-  game();
-</script>
 </html>
