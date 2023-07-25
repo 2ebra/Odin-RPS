@@ -1,72 +1,134 @@
 let playerScore = 0;
-  let computerScore = 0;
+let computerScore = 0;
+let round = 1;
+let winner = false;
 
-  function game() {
-    let rounds = 1;
+const playerPoints = document.getElementById("playerPoints")
+playerPoints.innerText = `${playerScore}`;
+const computerPoints = document.getElementById("computerPoints")
+computerPoints.innerText = `${computerScore}`;
+const roundWinner = document.getElementById("roundWinner");
+const currentRound= document.getElementById("currentRound");
+const playerWeapon = document.getElementById("playerWeapon");
+const computerWeapon = document.getElementById("computerWeapon");
 
-    for (i=1; i <= rounds; i++) {
-      console.log("+ - - ROUND "+ i + " - - +");
-      playRound()
+let playerIcon = document.createElement('img');
+let computerIcon = document.createElement('img');
+
+const playAgain = document.getElementById('playAgain');
+playAgain.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    round = 1;
+    winner = false;
+
+    playAgain.innerText="";
+
+    currentRound.innerText = `Let's get this party`;
+    roundWinner.innerText = `restarted`;
+})
+
+
+const buttons = document.querySelectorAll('button')
+
+buttons.forEach((button) => {
+
+    button.addEventListener('click', () => {
+        playGame(button.id);
+        console.log(button.id);
+    });
+  });
+
+//Checks to see if there's already a winner
+  function playGame(playerSelection) {
+    if(winner===false){
+        playRound(playerSelection);
     }
-    whoWon();
-
-    
   }
 
-  function playRound() {
+//Plays a round
+  function playRound(playerSelection) {
+    
     let computerSelection = getComputerChoice();
-    let playerSelection = prompt("ROCK, PAPER, SCISSORS:", "ROCK")
 
-    console.log (playerSelection + " vs " + computerSelection);
+    console.log(playerSelection + " VS " + computerSelection);
+
+    weaponSelection(playerSelection, computerSelection);
 
     if(playerSelection === computerSelection){
-      console.log("Tied")
+        currentRound.innerText = `Round ${round}`
+        roundWinner.innerText = `Tied`;
     }
-    if(playerSelection==="ROCK" && computerSelection==="SCISSORS" ||
-      playerSelection==="PAPER" && computerSelection==="ROCK" ||
-      playerSelection==="SCISSORS" && computerSelection==="PAPER" ) {
+    if(playerSelection==="Rock" && computerSelection==="Scissors" ||
+      playerSelection==="Paper" && computerSelection==="Rock" ||
+      playerSelection==="Scissors" && computerSelection==="Paper" ) {
         playerScore++;
-        console.log("Point for player!");
+        currentRound.innerText = `Round ${round}`
+        roundWinner.innerText = `You Won`;
+        round++;
       }
-    if(playerSelection==="ROCK" && computerSelection==="PAPER" ||
-      playerSelection==="PAPER" && computerSelection==="SCISSORS" ||
-      playerSelection==="SCISSORS" && computerSelection==="ROCK" ) {
+    if(playerSelection==="Rock" && computerSelection==="Paper" ||
+      playerSelection==="Paper" && computerSelection==="Scissors" ||
+      playerSelection==="Scissors" && computerSelection==="Rock" ) {
         computerScore++;
-        console.log("Point for computer!");
+        currentRound.innerText = `Round ${round}`
+        roundWinner.innerText = `You Lost`;
+        round++;
       }
 
+      playerPoints.innerText = `${playerScore}`;
+      computerPoints.innerText = `${computerScore}`;
 
-      console.log("Player: " + playerScore);
-      console.log("Computer: "+computerScore);
-    
+      console.log(playerScore + " " + computerScore);
+
+      if(playerScore === 3 || computerScore === 3){
+        whoWon()
+      }
   }
 
+//Gets computers randomized selection
   function getComputerChoice() {
     let random = Math.floor(Math.random()*3)+1;
 
     if(random === 1){
-      return "ROCK";
+      return "Rock";
     }
     if(random === 2){
-      return "PAPER";
+      return "Paper";
     }
     if(random === 3){
-      return "SCISSORS";
+      return "Scissors";
     } 
   }
 
-  function whoWon(){
-    if (computerScore > playerScore){
-      console.log ("YOU LOST");
-    }
-    else if (playerScore > computerScore){
-      console.log ("YOU WON");
-    }
-    else{
-      console.log("+ - - BREAK THE TIE - - +");
-      playRound();
-      whoWon();
-    }
+//Updates images
+  function weaponSelection(playerSelection, computerSelection){
+    
+    playerIcon.setAttribute(
+        'src',
+        `imgs/${playerSelection}.svg`
+    )
+
+    computerIcon.setAttribute(
+        'src',
+        `imgs/${computerSelection}.svg`
+    )
+
+    playerWeapon.appendChild(playerIcon);
+    computerWeapon.appendChild(computerIcon);
   }
 
-  //game();
+//Lets you know who won and chnages winner boolean
+  function whoWon(){
+    if (computerScore > playerScore){
+        currentRound.innerText = "Game Over"
+        roundWinner.innerText = "You Lost";
+    }
+    else{
+        currentRound.innerText = "Game Over"
+        roundWinner.innerText = "You Won";
+    }
+
+    winner = true;
+    playAgain.innerText = "Play Again?";
+  }

@@ -11,7 +11,7 @@
 </head>
 <body>
   <header>
-    <div class="container flex-row">
+    <div class="container flex-row g-3">
       <div class="title-container">
         <div><img src="imgs/Title-Rock.svg" alt="Rock"></div>
         <div><img src="imgs/Title-Paper.svg" alt="Paper"></div>
@@ -20,50 +20,53 @@
       <div class="instructions-container">
         <h3 class="header">Instructions</h3>
         <p class="comment">I mean do you really not know how to play Rock, Paper, Scissors?</p>
-        <p>Choose the weapon you're taking into battle with you and click on it. . With your object in tow you will face off against your challenger.</p>
+        <p>Choose the weapon you're taking into battle with you and click on it. With your weapon in tow you will now face off against your challenger. First to 3 points wins.</p>
         <p>Rock beats scissors, scissors beats paper, and paper beats rock (no one knows why or how but it does).</p>
       </div>
     </div>
   </header>
   <main>
     <section>
-      <div class="container">
+      <div class="container container-border">
         <h3 class="header t-al-c">Choose your weapon</h3>
         <div class="btn-container">
-          <button type="button" class="btn">
+          <button type="button" class="btn" id="Rock">
             <span class="btn__icon"><img src="imgs/Rock.svg" alt="Rock"></span>
             <span class="btn__text">ROCK</span>
           </button>
-          <button type="button" class="btn">
+          <button type="button" class="btn" id="Paper">
             <span class="btn__icon"><img src="imgs/Paper.svg" alt="Paper"></span>
             <span class="btn__text">PAPER</span>
           </button>
-          <button type="button" class="btn">
+          <button type="button" class="btn" id="Scissors">
             <span class="btn__icon"><img src="imgs/Scissors.svg" alt="Scissors"></span>
             <span class="btn__text">SCISSORS</span>
           </button>
         </div>
+        <p class="comment t-al-c" id="choiceComment">Choose wisely</p>
       </div>
     </section>
     <section>
-      <div class="container flex-row">
+      <p class="header t-al-c" style="margin: 0" id="currentRound">Let's see</p>
+      <p class="header t-al-c" id="roundWinner">who will win</p>
+      <div class="container flex-row g-1">
         <div class="score">
-          <div class="score__icon"></div>
+          <div class="score__icon" id="playerWeapon"></div>
           <div class="point-container flex-row">
             <div class="header">Player:</div>
-            <div class="score__points">01</div>
+            <div class="score__points" id="playerPoints">01</div>
           </div>
         </div>
         <div class="versus">VS</div>
         <div class="score">
-          <div class="score__icon"></div>
+          <div class="score__icon" id="computerWeapon"></div>
           <div class="point-container flex-row">
             <div class="header">Computer:</div>
-            <div class="score__points">01</div>
+            <div class="score__points" id="computerPoints">01</div>
           </div>
         </div>
-
       </div>
+      <div class="header t-al-c playAgain" id="playAgain"></div>
     </section>
   </main>
 

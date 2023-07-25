@@ -73,7 +73,6 @@ img, picture, video, canvas, svg {
 
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
-    max-inline-size: 75ch;
 }
 
 p {
@@ -117,9 +116,22 @@ section{
     justify-content: center;
 }
 
+.container-border{
+    border:2px solid var(--clr-accent);
+    border-radius: 20px;
+    padding: 2em;
+}
+
+.container-border>.header{
+    position: relative;
+    top: -50px;
+    background-color: var(--clr-bg);
+    color: var(--clr-accent)
+    
+}
+
 .flex-row {
     display: flex;
-    gap:5em;
     justify-content: center;
     align-items: center;
 }
@@ -129,11 +141,21 @@ section{
     font-size: var(--fs-600);
     text-transform: capitalize;
     letter-spacing: var(--fs-300);
+    display: inline-block;
+}
+
+.title-container>div{
+    margin: -20px 0;
+
 }
 
 .t-al-c {
-    text-align:center;
+    text-align: center;
 }
+
+.g-3 {gap:3em;}
+
+.g-1{gap: 1em;}
 
 .comment {
     font-weight: var(--fw-light);
@@ -155,24 +177,17 @@ section{
 .btn{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: .5em;
     min-width: 200px;
+    height: 100px;
     background-color: var(--clr-body);
     border: 15px solid var(--clr-bg);
     border-radius: 25px;
+    transition: 200ms all;
+    cursor:pointer;
 }
-
-.btn:hover{
-    border: 15px solid var(--clr-accent);
-    
-}
-
-.btn:active {
-    background-color: var(--clr-accent);
-}
-
 
 .btn__text{
     text-transform: capitalize;
@@ -183,11 +198,34 @@ section{
 
 }
 
+.btn__icon{
+    transition: 200ms all;
+    position: relative;
+    top:0;
+}
+
+.btn:hover{
+    border: 15px solid var(--clr-accent);
+    
+}
+.btn:hover>.btn__icon{
+    transform: scale(1.1);
+    top:-5px;
+}
+
+.btn:active {
+    background-color: var(--clr-accent);
+}
+
 .score{
     display:flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 200px;
+    width: 250px;
 }
+
 
 .point-container {
     display: flex;
@@ -202,4 +240,14 @@ section{
 .versus{
     font-size: var(--fs-900);
     font-family: var(--ff-header);
+}
+
+.playAgain{
+    color: var(--clr-accent);
+    cursor:pointer;
+
+}
+
+.playAgain:hover{
+    text-decoration: solid underline var(--clr-accent) 4px;
 }
